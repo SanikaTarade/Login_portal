@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Page</title>
+<style>
+        
+        .blue-button {
+            background-color: blue;
+            color: white; 
+            border: none;
+            padding: 10px 20px; 
+            cursor: pointer; 
+        }
+    </style>
+    <script>
+        
+        function createOrUpdateCustomer() {
+            var firstName = document.getElementById("first_name").value;
+            var lastName = document.getElementById("last_name").value;
+            var street = document.getElementById("street").value;
+            var address = document.getElementById("address").value;
+            var city = document.getElementById("city").value;
+            var state = document.getElementById("state").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+
+            
+            var customerData = {
+                first_name: firstName,
+                last_name: lastName,
+                street: street,
+                address: address,
+                city: city,
+                state: state,
+                email: email,
+                phone: phone
+            };
+
+            
+            var existingData = JSON.parse(localStorage.getItem('customerList')) || [];
+
+            
+            var existingCustomerIndex = -1;
+            for (var i = 0; i < existingData.length; i++) {
+                var existingCustomer = existingData[i];
+                if (existingCustomer.first_name === firstName && existingCustomer.last_name === lastName) {
+                    existingCustomerIndex = i;
+                    break;
+                }
+            }
+
+            if (existingCustomerIndex !== -1) {
+                
+                existingData[existingCustomerIndex] = customerData;
+                alert("Customer updated successfully.");
+            } else {
+                
+                existingData.push(customerData);
+                alert("Customer added successfully.");
+            }
+
+            
+            localStorage.setItem('customerList', JSON.stringify(existingData));
+        }
+    </script>
+</head>
+<body>
+    <h2>Create or Update Customer</h2>
+    <form>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required><br><br>
+
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" name="last_name" required><br><br>
+
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="street"><br><br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address"><br><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city"><br><br>
+
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state"><br><br>
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email"><br><br>
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone"><br><br>
+
+        <input type="button" class="blue-button"  value="Create/Update Customer" onclick="createOrUpdateCustomer()">
+    </form>
+</body>
+</html>

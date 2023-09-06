@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+<style>
+        
+        .blue-button {
+            background-color: blue;
+            color: white;
+            border: none; 
+            padding: 10px 20px;
+            cursor: pointer; 
+        }
+    </style>
+    <script>
+        function checkLogin() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            
+            if (username === "test@sunbasedata.com" && password === "Test@123") {
+              
+                window.location.href = "new_customer.html";
+            } else {
+                alert("Login failed. Please check your credentials.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Login</h2>
+    <form>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="button" class="blue-button" value="Login" onclick="checkLogin()">
+    </form>
+</body>
+</html>
